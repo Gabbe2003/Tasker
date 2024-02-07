@@ -7,7 +7,7 @@ const UserSchema = new Schema({
         type: String,
         required: true, 
         unique: true,
-        trim: true
+        trim: true,
     },
     password: {
         type: String,
@@ -18,7 +18,7 @@ const UserSchema = new Schema({
         required: true, 
         unique: true,
         trim: true,
-        lowercase: true
+        lowercase: true,
     },
     refreshToken: []
     },

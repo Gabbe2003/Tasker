@@ -1,3 +1,5 @@
+
+
 const User = require('../../models/usersSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -63,12 +65,14 @@ const handleLogin = async (req, res) => {
 
         // Clear the old refresh token cookie if it exists
         if (cookies?.jwt) {
-            res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: false }); 
+            res.clearCookie('accessToken', { httpOnly: true, sameSite: 'Lax', secure: false }); 
         }
+        
+        res.cookie('accessToken', accessToken, { httpOnly: true, sameSite: 'Lax', secure: false, maxAge: 15 * 60 * 1000 }); // 15 minutes
 
-        // Set the new refresh token as a cookie
-        res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: false, maxAge: 24 * 60 * 60 * 1000 }); 
-        // Set secure to true in production, If you don't have accses to HTTPS then let it be false otherwise it will not be sent on http.
+        // Set the refresh token as a separate cookie
+        res.cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'Lax', secure: false, maxAge: 7 * 24 * 60 * 60 * 1000 }); // 7 days
+        
 
         // Send the access token to the client
         res.json({

@@ -12,9 +12,9 @@ const errorMessages = {
     expiredToken:'Access token is invalid or expired',
     unauthorizedUser:'Unauthorized user. Please login!',
     emptyFolderName:'Folder name is required, please fill the empty name.',
-    usedFolderName: 'Folder with the same name already exists, try another name.'
-
-
+    usedFolderName: 'Folder with the same name already exists, try another name.',
+    invalidToken: 'Your token is invalid or missing, login again!.',
+    noTokenProvided: 'There is no token provided.'
 };
 
 module.exports = errorMessages;

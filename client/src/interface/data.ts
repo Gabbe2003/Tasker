@@ -1,4 +1,4 @@
-export interface Task {
+export interface ITask {
     name: string;
     subTask: string;
     priority: 'low' | 'medium' | 'high';
@@ -6,10 +6,11 @@ export interface Task {
     dueDate: Date;
   }
   
-  export interface Folder {
+  export interface IFolder {
     name: string;
     favorite?: boolean;
-    tasks: Task[];
+    tasks: ITask[];
+    user: string;
   }
 
   export type IAlertProps = {
@@ -19,24 +20,24 @@ export interface Task {
   };
 
   
-  export interface State {
+  export interface IState {
     name: string;
-    editTask: Task[];
-    tasks: Task[];
-    folders: Folder[];
+    editTask: ITask[];
+    tasks: ITask[];
+    folders: ITask[];
     subTask: string;
-    selectedFolder: Folder | null;
-    editingFolder: Folder | null;
+    selectedFolder: IFolder | null;
+    editingFolder: IFolder | null;
     folderName: string;
     taskName: string;
     taskPriority: 'low' | 'medium' | 'high';
     taskStatus: "completed" | "in progress" | "pending";
     taskDueDate: string;
     search: string;
-    selectedTask: Task | string | null;
+    selectedTask: ITask | string | null;
   }
   
-  export const initialState: State = {
+  export const initialState: IState = {
   name:'',
   editTask: [],
   tasks: [],
@@ -53,4 +54,11 @@ export interface Task {
   selectedTask: '',
   }
   
-  
+export interface IAlert {
+  message: string;
+  type: string;
+}
+
+export interface IErrorResponse {
+  message: string;
+}

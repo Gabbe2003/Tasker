@@ -12,10 +12,11 @@ const Alert: React.FC<IAlertProps> = ({ message, type, dismissAlert }) => {
     }, [dismissAlert]);
 
     return (
-        <div className={`alert ${type}`}>
-            {message}
-            <button onClick={dismissAlert}>Dismiss</button>
-        </div>
+        <div className={`alert ${type}`} role="alert">
+        {message}
+        <button onClick={dismissAlert}>Dismiss</button>
+    </div>
+    
     );
 }
 

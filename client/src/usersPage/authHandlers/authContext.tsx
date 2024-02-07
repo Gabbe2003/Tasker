@@ -10,9 +10,9 @@ export interface AuthContextType {
   user: User | null;
   login: (userData: User) => void;
   logout: () => void;
-  verifySession: () => Promise<boolean>; // Corrected the return type
+  verifySession: () => Promise<boolean>;
   isSessionLoading: boolean;
-  setUser: (userData: User | null) => void; // Corrected the type of setUser
+  setUser: (userData: User | null) => void;
 }
 
 interface AuthProviderProps {
@@ -23,9 +23,9 @@ const AuthContext = createContext<AuthContextType>({
   user: null,
   login: () => {},
   logout: () => {},
-  verifySession: async () => false, // Provide a default implementation
+  verifySession: async () => false,
   isSessionLoading: true,
-  setUser: () => {} // Provide a default implementation
+  setUser: () => {} 
 });
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
@@ -42,7 +42,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setUser(null);
   };
 
-  const verifySession = useCallback(async (): Promise<boolean> => {
+  const verifySession = useCallback( async (): Promise<boolean> => {
     setIsSessionLoading(true);
     try {
       const response = await plainHttp.get('http://localhost:8000/verifyUser');
@@ -54,10 +54,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setIsSessionLoading(false);
       logout();
       return false;
-    } finally {
-      setIsSessionLoading(false);
-    }
-  
+    } 
   }, []);
 
   const contextValue = { user, isSessionLoading, login, logout, verifySession, setUser };
